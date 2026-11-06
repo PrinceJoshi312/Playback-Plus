@@ -40,7 +40,7 @@ Since this is in development format, you can load it directly into your preferre
    - Toggle the **Developer mode** switch in the top-right corner of the extensions page.
 3. **Load the Extension**:
    - Click the **Load unpacked** button in the top-left corner.
-   - Select the workspace folder: `C:\Users\HP\OneDrive\Desktop\videospeedext`
+   - Select the workspace folder: `C:\xyz\videospeedext`
 4. **Pin for Easy Access**:
    - Click the extensions puzzle icon in the browser toolbar and pin **Tempo Video Speed Regulator**.
 
@@ -50,7 +50,7 @@ Since this is in development format, you can load it directly into your preferre
 2. **Load Temporary Add-on**:
    - Click the **Load Temporary Add-on...** button.
 3. **Select Manifest File**:
-   - Navigate to the workspace folder: `C:\Users\HP\OneDrive\Desktop\videospeedext` and choose the `manifest.json` file.
+   - Navigate to the workspace folder: `C:\xyz\videospeedext` and choose the `manifest.json` file.
 4. **Test & Play**:
    - The extension will instantly load and remain active for your current browser session.
 
@@ -58,8 +58,8 @@ Since this is in development format, you can load it directly into your preferre
 
 ## Project Structure
 
-- [manifest.json](file:///C:/Users/HP/OneDrive/Desktop/videospeedext/manifest.json) – Configuration for Manifest V3.
-- [content.js](file:///C:/Users/HP/OneDrive/Desktop/videospeedext/content.js) – Content script injected into tabs. Handles keystrokes, controls HTML5 playback, and overlays the Shadow DOM HUD.
-- [popup.html](file:///C:/Users/HP/OneDrive/Desktop/videospeedext/popup.html) – UI layout for browser action panel.
-- [popup.css](file:///C:/Users/HP/OneDrive/Desktop/videospeedext/popup.css) – Premium styles for extension popup.
-- [popup.js](file:///C:/Users/HP/OneDrive/Desktop/videospeedext/popup.js) – Extension tab communication.
+- [manifest.json](file:///C:/xyz/videospeedext/manifest.json) – Configuration for Manifest V3.
+- [content.js](file:/xyz/videospeedext/content.js) – Content script injected into tabs. Handles keystrokes, controls HTML5 playback, and overlays the Shadow DOM HUD.
+- [popup.html](file:///C:/xyz/videospeedext/popup.html) – UI layout for browser action panel.
+- [popup.css](file:///C:/xyz/videospeedext/popup.css) – Premium styles for extension popup.
+- [popup.js](file:///C:/xyz/videospeedext/popup.js) – Extension tab communication.
