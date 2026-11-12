@@ -1,110 +1,74 @@
-# Playback+ - Browser-Neutral Video Speed Control Extension
+# Playback+ — Video Speed Controls
 
-A lightweight, high-performance browser extension (Manifest V3) that lets you control video playback speed on any website - YouTube, Vimeo, Netflix, custom HTML5 players, and more - using your numpad or standard keyboard.
+Playback+ is a browser extension for controlling HTML5 video speed with the numpad, keyboard shortcuts, or the on-video controls. The repository keeps each release in its own folder; **V3 is the current version**.
 
 ## Features
 
-- **Browser Neutral** - Works across the standard `chrome.*` and `browser.*` extension APIs, so it runs on Chrome, Firefox, Edge, Brave, Safari, and other WebExtensions-compliant browsers.
-- **Universal Detection** - Automatically finds and attaches to any HTML5 `<video>` element on a page.
-- **Numpad Shortcuts** - Fast, single-keypress speed changes.
-- **Laptop-Friendly Fallback** - Full functionality on keyboards without a numpad.
-- **Shadow DOM HUD** - An on-page overlay that displays the current speed, isolated from the host site's CSS so it always looks and behaves correctly.
-- **Popup Dashboard** - A responsive control panel with adjustable increments and speed presets.
-
----
+- Adjust playback speed on pages with HTML5 video, including YouTube and Vimeo.
+- Use numpad shortcuts or standard `+`, `=`, `-`, and `*` keys where supported.
+- Change speed from the popup dashboard or the on-video badge.
+- Lock the selected speed so it carries over when the active video changes. The lock lasts for the current page session.
+- Choose how the on-video badge appears:
+  - **Always visible (transparent)** keeps the faint badge shown.
+  - **Show after numpad use** hides the badge until a supported numpad action, then shows it for 2.5 seconds.
+- Adjust speed increments and use preset speeds from the popup.
+- The page overlay uses Shadow DOM to avoid most styling conflicts with websites.
 
 ## Keyboard Controls
 
-| Action | Numpad Key | Laptop Key |
+| Action | Numpad key | Standard key |
 |---|---|---|
-| Speed Up | `Numpad +` | `+` or `=` |
-| Slow Down | `Numpad -` | `-` |
-| Reset Speed (1.0x) | `Numpad *` | `*` |
-| Play / Pause | `Numpad 5` | — |
-| Seek Backward 5s | `Numpad 4` | — |
-| Seek Forward 5s | `Numpad 6` | — |
+| Speed up | `Numpad +` | `+` or `=` |
+| Slow down | `Numpad -` | `-` |
+| Reset speed to 1.0× | `Numpad *` | `*` |
+| Lock or unlock speed | `Numpad Del` / `Numpad Decimal` | — |
+| Play or pause | `Numpad 5` | — |
+| Seek backward 5 seconds | `Numpad 4` | — |
+| Seek forward 5 seconds | `Numpad 6` | — |
 
-> [!NOTE]
-> Shortcuts are automatically disabled while typing in text boxes, search fields, or textareas, so they won't interfere with normal typing.
+Shortcuts are ignored while a text field, search box, textarea, or editable element is focused.
 
----
+## Install V3
 
-## Installation (from local file structure)
+The extension is not currently published in an extension store. Load it from the repository; no build step is required.
 
-This extension isn't published on any extension store yet, so it needs to be loaded manually as an "unpacked" extension. This works directly from a folder on your computer - no build step required.
+1. Clone the repository or download and extract its ZIP:
 
-### 1. Get the files onto your machine
+   ```bash
+   git clone https://github.com/PrinceJoshi312/Playback-Plus.git
+   ```
 
-Clone the repo:
+2. In your browser, load the **`V3` folder**—the folder containing `manifest.json`.
 
-```bash
-git clone https://github.com/PrinceJoshi312/playback-plus.git
-```
+   **Chrome, Edge, Brave, Opera, and other Chromium browsers:**
+   - Open `chrome://extensions/` (or the browser’s extension management page).
+   - Turn on **Developer mode**.
+   - Select **Load unpacked** and choose the repository’s `V3` folder.
 
-Or download it as a ZIP from GitHub (**Code → Download ZIP**) and extract it somewhere memorable.
+   **Firefox:**
+   - Open `about:debugging#/runtime/this-firefox`.
+   - Select **Load Temporary Add-on…** and choose `V3/manifest.json`.
 
-You should end up with a folder containing at least:
-```
-manifest.json
-content.js
-popup.html
-popup.css
-popup.js
-```
+   Firefox removes temporary add-ons when it closes, so load the add-on again for a new session unless you package it for persistent installation.
 
-### 2. Load it into your browser
+3. Pin Playback+ from the browser’s extensions menu if you want quick access to the popup.
 
-**Chromium-based (Chrome, Edge, Brave, Opera, Vivaldi):**
-1. Go to `chrome://extensions/` (or Menu → Extensions → **Manage Extensions**).
-2. Enable **Developer mode** (top-right toggle).
-3. Click **Load unpacked**.
-4. Select the folder you cloned/extracted — the one containing `manifest.json`.
-5. Click the puzzle-piece icon in the toolbar and pin **Playback+** for quick access.
+## Use the Extension
 
-**Firefox (Gecko-based):**
-1. Go to `about:debugging#/runtime/this-firefox`.
-2. Click **Load Temporary Add-on…**.
-3. Select the `manifest.json` file inside the folder.
+Open a page with a video and use the keyboard controls above or the on-video speed badge. Click the lock icon on the badge, or press **Numpad Del**, to lock or unlock the current speed. The popup lets you set a speed, choose a step size, and use presets.
 
-> [!WARNING]
-> Firefox removes temporary add-ons when the browser closes. You'll need to reload it via `about:debugging` each session, or package it properly (`web-ext build`) for persistent use.
+To change the badge display mode, open the extension popup and select the gear/settings button. The selected mode is remembered by the extension.
 
-### 3. Updating
+When you update the files, refresh the extension from the browser’s extension management page and reload the video tab. In Firefox, reload the temporary add-on from `about:debugging`.
 
-Since it's loaded from a local folder, updates are simple:
-- Pull the latest changes (`git pull`) or re-download the ZIP.
-- On Chromium browsers, click the refresh icon on the extension's card in `chrome://extensions/`.
-- On Firefox, reload the temporary add-on from `about:debugging`.
+## Versions
 
----
+- [**V1 — Keyboard controls**](v1/) — the original keyboard-focused extension.
+- [**V2 — Keyboard and mouse controls**](v2/) — adds clickable speed controls to the on-video badge.
+- [**V3 — Speed lock and display modes**](V3/) — the current version, with Numpad Del speed locking, an adjustable on-screen display, and the popup controls.
 
-## Usage
-
-Once installed, navigate to any page with a video (YouTube, Netflix, a raw `<video>` tag, etc.):
-
-1. Click into the page (the tab needs focus) so keyboard shortcuts are picked up.
-2. Use the keys from the [Keyboard Controls](#keyboard-controls) table to change speed, seek, or play/pause.
-3. A small HUD will briefly appear on screen confirming the new speed.
-4. Alternatively, click the **Playback+** icon in your toolbar to open the popup dashboard, where you can set a precise speed, adjust the increment size, or use one-click presets.
-
-Shortcuts are automatically suspended while a text field is focused, so you can type in comments, search bars, etc. without accidentally changing playback speed.
-
----
-
-This repository contains two versions of the extension:
-
-### 📁 [v1 - Keyboard-Only Version](v1)
-- The original version mapping video playback controls exclusively to the numpad/laptop keyboard.
-- Contains its own standalone `manifest.json`, `content.js`, `index.html`, and popup components.
-
-### 📁 [v2 - Keyboard & Mouse Controls Version (Upgraded)](v2)
-- The upgraded version adding interactive, hoverable, and clickable 3D keycap-style arrow buttons directly on the video speed badges.
-- Allows full mouse-click regulation of speed step-up, step-down, and reset to 1x, while keeping all key mappings active.
-- Contains its own standalone `manifest.json`, `content.js`, `index.html`, and popup components.
-
----
+Each version folder contains its own extension files. Load the version folder you want to use, rather than the repository root.
 
 ## Contributing
 
-Issues and pull requests are welcome. If you find a site where speed control doesn't work correctly, please open an issue with the URL so the video-detection logic can be improved.
-
+Issues and pull requests are welcome. If you find a site where speed control does not work as expected, include the site name and a description of the video player behavior in an issue.
