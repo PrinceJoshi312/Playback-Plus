@@ -1,13 +1,15 @@
 # Playback+ — Video Speed Controls
 
-Playback+ is a browser extension for controlling HTML5 video speed with the numpad, keyboard shortcuts, or the on-video controls. The repository keeps each release in its own folder; **V3 is the current version**.
+Playback+ is a browser extension for controlling HTML5 video speed with the numpad, customizable keyboard shortcuts, or the on-video controls. The repository keeps each release in its own folder; **V4 is the current version**.
 
 ## Features
 
 - Adjust playback speed on pages with HTML5 video, including YouTube and Vimeo.
 - Use numpad shortcuts or standard `+`, `=`, `-`, and `*` keys where supported.
 - Change speed from the popup dashboard or the on-video badge.
-- Lock the selected speed so it carries over when the active video changes. The lock lasts for the current page session.
+- Remember the selected playback speed by site hostname and restore it as the locked speed across pages on that site.
+- Reset a site's saved speed to the 1.0× default from the popup.
+- Change or disable each keyboard shortcut in the settings page; duplicate assignments are rejected.
 - Choose how the on-video badge appears:
   - **Always visible (transparent)** keeps the faint badge shown.
   - **Show after numpad use** hides the badge until a supported numpad action, then shows it for 2.5 seconds.
@@ -28,7 +30,7 @@ Playback+ is a browser extension for controlling HTML5 video speed with the nump
 
 Shortcuts are ignored while a text field, search box, textarea, or editable element is focused.
 
-## Install V3
+## Install V4
 
 The extension is not currently published in an extension store. Load it from the repository; no build step is required.
 
@@ -38,16 +40,16 @@ The extension is not currently published in an extension store. Load it from the
    git clone https://github.com/PrinceJoshi312/Playback-Plus.git
    ```
 
-2. In your browser, load the **`V3` folder**—the folder containing `manifest.json`.
+2. In your browser, load the **`V4` folder**—the folder containing `manifest.json`.
 
    **Chrome, Edge, Brave, Opera, and other Chromium browsers:**
    - Open `chrome://extensions/` (or the browser’s extension management page).
    - Turn on **Developer mode**.
-   - Select **Load unpacked** and choose the repository’s `V3` folder.
+   - Select **Load unpacked** and choose the repository’s `V4` folder.
 
    **Firefox:**
    - Open `about:debugging#/runtime/this-firefox`.
-   - Select **Load Temporary Add-on…** and choose `V3/manifest.json`.
+   - Select **Load Temporary Add-on…** and choose `V4/manifest.json`.
 
    Firefox removes temporary add-ons when it closes, so load the add-on again for a new session unless you package it for persistent installation.
 
@@ -55,7 +57,11 @@ The extension is not currently published in an extension store. Load it from the
 
 ## Use the Extension
 
-Open a page with a video and use the keyboard controls above or the on-video speed badge. Click the lock icon on the badge, or press **Numpad Del**, to lock or unlock the current speed. The popup lets you set a speed, choose a step size, and use presets.
+Open a page with a video and use the keyboard controls above or the on-video speed badge. Click the lock icon on the badge, or press **Numpad Del**, to lock or unlock the current speed. The popup lets you set a speed, choose a step size, use presets, reset the current site's saved speed, and open keyboard settings.
+
+Open **Keyboard shortcuts** from the popup to change shortcuts. Focus a shortcut field and press a key or combination; press Backspace/Delete to disable that action. Duplicate assignments cannot be saved. Shortcuts are inactive while typing in an input, select, textarea, or editable page element. Default shortcuts match the V3 Numpad controls, with laptop `+`, `=`, `-`, `_`, and `*` aliases for speed adjustments.
+
+V4 stores speed preferences in the extension's local storage using `tempoSiteSpeed:<hostname>`. A preference applies across pages on the same hostname; it is not synchronized across browser profiles. Reset removes that site's preference and returns the current video to 1.0×. Only HTTP and HTTPS pages receive the content script. Browser-internal pages are excluded. Current Chrome and Firefox are the intended targets; browser-specific packaging and reserved shortcuts may differ. Safari has not been verified.
 
 To change the badge display mode, open the extension popup and select the gear/settings button. The selected mode is remembered by the extension.
 
@@ -65,7 +71,8 @@ When you update the files, refresh the extension from the browser’s extension 
 
 - [**V1 — Keyboard controls**](v1/) — the original keyboard-focused extension.
 - [**V2 — Keyboard and mouse controls**](v2/) — adds clickable speed controls to the on-video badge.
-- [**V3 — Speed lock and display modes**](V3/) — the current version, with Numpad Del speed locking, an adjustable on-screen display, and the popup controls.
+- [**V3 — Speed lock and display modes**](V3/) — adds Numpad Del speed locking, an adjustable on-screen display, and popup controls.
+- [**V4 — Site preferences and customizable shortcuts**](V4/) — adds saved per-site speed, reset controls, and a shortcut editor.
 
 Each version folder contains its own extension files. Load the version folder you want to use, rather than the repository root.
 
