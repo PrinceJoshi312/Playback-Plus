@@ -1,0 +1,27 @@
+{
+  "manifest_version": 3,
+  "name": "Tempo Video Speed Regulator",
+  "version": "4.0.0",
+  "description": "Control video speed with per-site preferences and customizable keyboard shortcuts.",
+  "permissions": [
+    "activeTab",
+    "storage"
+  ],
+  "options_page": "settings.html",
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Tempo Player Controls"
+  }
+}
