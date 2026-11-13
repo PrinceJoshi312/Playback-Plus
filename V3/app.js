@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // --- State Variables ---
   let speedStep = parseFloat(stepSelect.value);
   let currentSpeed = 1.0;
-  let speedLocked = false;
+  let speedLocked = true;
   let lockedSpeed = 1.0;
   let osdMode = 'transparent';
   let osdRevealTimeout = null;

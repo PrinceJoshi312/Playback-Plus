@@ -2,8 +2,8 @@
 
 // State variables (runtime only, no persistence per requirements)
 let speedStep = 0.25;
-let speedLocked = false;
-let lockedSpeed = 1.0;
+let speedLocked = true;
+let lockedSpeed = getActiveVideo()?.playbackRate ?? 1.0;
 let osdMode = 'transparent';
 let hudTimeout = null;
 

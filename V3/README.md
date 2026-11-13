@@ -1,69 +1,40 @@
-# Tempo: Browser-Neutral Video Speed Control Extension
+# Tempo Video Speed Regulator (V3)
 
-A high-performance, browser-neutral browser extension (Manifest V3) that regulates video playback speed on any website (YouTube, Vimeo, Netflix, custom players, etc.) using your Numpad keyboard controls.
+A browser extension for controlling HTML5 video speed with the keyboard or the extension popup. The playback speed lock is enabled by default. Speed changes then remain in effect as the active video changes; use the lock control or `Numpad Decimal` to toggle it.
 
-## Features
-- **Browser Neutrality**: Dynamically supports the standard `chrome.*` and `browser.*` namespaces, ensuring compatibility with Chrome, Firefox, Edge, Safari, Brave, and other WebExtensions-compliant browsers.
-- **Global Injections**: Automatically detects HTML5 players on any web page.
-- **Numpad Mapping**: Fast, single-keypress speed regulations.
-- **Laptop Fallback**: Works on standard laptop keys too.
-- **Shadow DOM Overlay**: Premium HUD display inside the page that is protected from website CSS overrides.
-- **Responsive Popup Dashboard**: Accessible speed controls, customizable increments, and preset quick actions.
-- **On-Screen Display Modes**: Keep the speed badge faintly visible or show it briefly after a numpad action.
+## Install for development
 
----
+This folder is an unpacked browser extension; no build step or `npm install` is needed.
 
-## Keyboard Controls Reference
+### Chrome, Edge, Brave, and other Chromium browsers
 
-| Action | Numpad Key | Standard Laptop Key |
-|---|---|---|
-| **Speed Up** | `Numpad +` | `+` or `=` |
-| **Slow Down** | `Numpad -` | `-` |
-| **Reset Speed (1.0x)** | `Numpad *` | `*` |
-| **Lock / Unlock Speed** | `Numpad Del` | - |
-| **Play / Pause** | `Numpad 5` | - |
-| **Seek Backward (5s)** | `Numpad 4` | - |
-| **Seek Forward (5s)** | `Numpad 6` | - |
+1. Open `chrome://extensions` (or `edge://extensions` in Edge).
+2. Turn on **Developer mode**.
+3. Select **Load unpacked** and choose this `V3` folder (the folder containing `manifest.json`).
+4. Reload any tabs that were already open.
 
-> [!NOTE]
-> Keyboard hotkeys automatically disable when typing in text boxes, search fields, or textareas so they won't interfere with typing comments or search queries.
+### Firefox
 
-Choose the on-screen display behavior from the settings panel. In **Show after numpad use** mode, the speed badge appears for 2.5 seconds after a supported numpad action.
+1. Open `about:debugging#/runtime/this-firefox`.
+2. Select **Load Temporary Add-on…** and choose `V3/manifest.json`.
+3. Reload any tabs that were already open. Temporary add-ons must be loaded again after Firefox restarts.
 
----
+## Controls
 
-## How to Install the Extension in Your Browser
+| Action | Key |
+| --- | --- |
+| Increase speed | `Numpad +` or `+` / `=` |
+| Decrease speed | `Numpad -` or `-` / `_` |
+| Reset to 1× | `Numpad *` or `*` |
+| Lock or unlock speed | `Numpad Decimal` (`Numpad Del`) |
+| Play or pause | `Numpad 5` |
+| Seek back / forward 5 seconds | `Numpad 4` / `Numpad 6` |
 
-Since this is in development format, you can load it directly into your preferred browser:
+Keyboard shortcuts are ignored while typing in an input, select, textarea, or editable field. The popup provides speed controls, step size, presets, and display settings. The injected controls work with HTML5 video; browser-internal pages and some protected or non-HTML5 players may not allow extensions to control playback.
 
-### For Chromium-Based Browsers (Chrome, Edge, Brave, Opera, Vivaldi)
-1. **Open Extension Management Page**:
-   - In Chrome, navigate to: `chrome://extensions/`
-   - Or click the Extensions menu (puzzle piece icon) and select **Manage Extensions**.
-2. **Enable Developer Mode**:
-   - Toggle the **Developer mode** switch in the top-right corner of the extensions page.
-3. **Load the Extension**:
-   - Click the **Load unpacked** button in the top-left corner.
-   - Select the workspace folder: `C:\Users\HP\OneDrive\Desktop\videospeedext`
-4. **Pin for Easy Access**:
-   - Click the extensions puzzle icon in the browser toolbar and pin **Tempo Video Speed Regulator**.
+## Files
 
-### For Mozilla Firefox (Gecko-Based)
-1. **Open Debugging Console**:
-   - In Firefox, navigate to: `about:debugging#/runtime/this-firefox`
-2. **Load Temporary Add-on**:
-   - Click the **Load Temporary Add-on...** button.
-3. **Select Manifest File**:
-   - Navigate to the workspace folder: `C:\Users\HP\OneDrive\Desktop\videospeedext` and choose the `manifest.json` file.
-4. **Test & Play**:
-   - The extension will instantly load and remain active for your current browser session.
-
----
-
-## Project Structure
-
-- [manifest.json](file:///C:/Users/HP/OneDrive/Desktop/videospeedext/manifest.json) – Configuration for Manifest V3.
-- [content.js](file:///C:/Users/HP/OneDrive/Desktop/videospeedext/content.js) – Content script injected into tabs. Handles keystrokes, controls HTML5 playback, and overlays the Shadow DOM HUD.
-- [popup.html](file:///C:/Users/HP/OneDrive/Desktop/videospeedext/popup.html) – UI layout for browser action panel.
-- [popup.css](file:///C:/Users/HP/OneDrive/Desktop/videospeedext/popup.css) – Premium styles for extension popup.
-- [popup.js](file:///C:/Users/HP/OneDrive/Desktop/videospeedext/popup.js) – Extension tab communication.
+- `manifest.json` — extension permissions, popup, and content script registration.
+- `content.js` — website video detection, keyboard controls, and on-page badge.
+- `popup.html`, `popup.css`, `popup.js` — toolbar popup interface and controls.
+- `index.html`, `styles.css`, `app.js` — standalone player interface.
